@@ -1,3 +1,6 @@
 {
-    "appname": "WelshAcademy"
+  "appname": "WelshAcademy",
+  "filters.ingredients": "Sélection des ingredients",
+  "modal.valid": "OK",
+  "modal.cancel": "Annuler"
 }
