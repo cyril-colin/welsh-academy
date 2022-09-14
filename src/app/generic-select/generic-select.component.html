@@ -1,0 +1,9 @@
+<button mat-button color="primary" (click)="openDialog()">Primary</button>
+<mat-chip-list>
+    <mat-chip *ngFor="let selected of selection" (removed)="remove(selected)">
+        {{selected.label}}
+        <button matChipRemove>
+            <mat-icon>cancel</mat-icon>
+        </button>
+    </mat-chip>
+</mat-chip-list>

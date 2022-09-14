@@ -1,0 +1,18 @@
+<mat-card>
+  <mat-card-title>{{data.modalTitle}}</mat-card-title>
+
+  <mat-card-content>
+    <mat-checkbox *ngFor="let o of data.options"
+                  [checked]="o.selected"
+                  (change)="check(o)">
+      {{o.label}}
+    </mat-checkbox>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="validSelection()">{{'modal.valid' | transloco}}</button>
+    <button mat-raised-button (click)="cancel()">{{'modal.cancel' | transloco}}</button>
+  </mat-card-actions>
+</mat-card>
+
+
