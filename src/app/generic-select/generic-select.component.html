@@ -1,4 +1,4 @@
-<button mat-button color="primary" (click)="openDialog()">Primary</button>
+<button mat-button color="primary" (click)="openDialog()">{{ 'generic-select.select' | transloco }}</button>
 <mat-chip-list>
     <mat-chip *ngFor="let selected of selection" (removed)="remove(selected)">
         {{selected.label}}

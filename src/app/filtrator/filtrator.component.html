@@ -1,0 +1,18 @@
+<form [formGroup]="form">
+  <mat-form-field appearance="fill">
+    <mat-label>{{'filtrator.by-name' | transloco}}</mat-label>
+    <input matInput placeholder="{{'filtrator.your-search' | transloco}}" [formControl]="form.controls.searchText">
+  </mat-form-field>
+
+  <app-generic-select
+    [modalTitle]="'filters.ingredients' | transloco"
+    [options]="ingredientOptions"
+    (newSelection)="newIngredientsSelection($event)"
+  ></app-generic-select>
+
+
+
+  <button mat-raised-button color="accent" (click)="applyFilters()">{{'filtrator.run' | transloco}}</button>
+</form>
+
+

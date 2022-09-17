@@ -1,6 +1,9 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import { SelectOption } from './generic-select/generic-select.component';
 import { Ingredient } from './models/ingredient';
+import {map, Observable, tap} from 'rxjs';
+import {IngredientsService} from './repositories/ingredients/ingredients.service';
+import {GetAllParams} from './repositories/recipes/recipes.service';
 
 export function uuidv4(): string {
   return (`${1e7}-${1e3}-${4e3}-${8e3}-${1e11}`).replace(/[018]/g, (c: any) =>
@@ -13,19 +16,14 @@ export function uuidv4(): string {
   styleUrls: ['./app.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent {
-  public options: SelectOption<Ingredient>[] = [
-    {data: {token: uuidv4(), name: 'cucumber'}, label: 'cucumber', selected: true},
-    {data: {token: uuidv4(), name: 'Carot'}, label: 'Carot', selected: true},
-    {data: {token: uuidv4(), name: 'apple'}, label: 'apple', selected: true},
-    {data: {token: uuidv4(), name: 'salt'}, label: 'salt', selected: true},
-    {data: {token: uuidv4(), name: 'sugar'}, label: 'sugar', selected: true},
-    {data: {token: uuidv4(), name: 'meat'}, label: 'meat', selected: true},
-  ]
-  public title = 'WelshAcademy';
-
-  public selection: Ingredient[] = [];
-
+export class AppComponent implements OnInit{
   constructor(
+
   ) {}
+
+  public ngOnInit(): void {
+
+  }
+
+
 }

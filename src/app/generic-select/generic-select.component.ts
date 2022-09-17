@@ -57,10 +57,6 @@ export class GenericSelectComponent<T extends Model> extends AbstractComponent i
     this.cdr.detectChanges();
   }
 
-  public ngAfterViewInit(): void {
-    this.cdr.detectChanges();
-  }
-
   public remove(option: SelectOption<T>): void {
 
     const o = this.options.find(o => o.data.token === option.data.token);

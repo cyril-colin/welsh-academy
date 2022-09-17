@@ -2,5 +2,9 @@
   "appname": "WelshAcademy",
   "filters.ingredients": "Sélection des ingredients",
   "modal.valid": "OK",
-  "modal.cancel": "Annuler"
+  "modal.cancel": "Annuler",
+  "filtrator.by-name": "Par nom de recette",
+  "filtrator.your-search": "Votre recherche ici",
+  "filtrator.run": "Rechercher",
+  "generic-select.select": "Sélectionner"
 }
