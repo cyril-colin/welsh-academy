@@ -1,12 +1,9 @@
 
-<app-filtrator *ngIf="allIngredients$ | async as ingredients"
-               [allIngredients]="ingredients"
-               (newFilters)="applySearch($event)"
-></app-filtrator>
+<app-filtrator (newFilters)="applySearch($event)"></app-filtrator>
 
-<mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+<mat-progress-bar *ngIf="isLoading$ | async" mode="indeterminate"></mat-progress-bar>
 
-<ul>
+<ul *ngIf="recipes$ | async as recipes">
   <li *ngFor="let r of recipes">{{r.name}}</li>
 </ul>
 

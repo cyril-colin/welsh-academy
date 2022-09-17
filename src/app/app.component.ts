@@ -4,6 +4,8 @@ import { Ingredient } from './models/ingredient';
 import {map, Observable, tap} from 'rxjs';
 import {IngredientsService} from './repositories/ingredients/ingredients.service';
 import {GetAllParams} from './repositories/recipes/recipes.service';
+import {Store} from '@ngxs/store';
+import {IngredientsAction} from './state/ingredients/ingredients.action';
 
 export function uuidv4(): string {
   return (`${1e7}-${1e3}-${4e3}-${8e3}-${1e11}`).replace(/[018]/g, (c: any) =>
@@ -18,11 +20,11 @@ export function uuidv4(): string {
 })
 export class AppComponent implements OnInit{
   constructor(
-
+    private store: Store,
   ) {}
 
   public ngOnInit(): void {
-
+    this.store.dispatch(new IngredientsAction.LoadIngredients()).subscribe();
   }
 
 

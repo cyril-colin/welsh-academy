@@ -15,6 +15,10 @@ import {MOCKS} from '../mocks';
 import {TranslocoModule} from '@ngneat/transloco';
 import {HomePageComponent} from './pages/home-page/home-page.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {environment} from '../environments/environment';
+import {NgxsModule} from '@ngxs/store';
+import {RecipesState} from './state/recipes/recipes.state';
+import {IngredientsState} from './state/ingredients/ingredients.state';
 
 @NgModule({
   declarations: [
@@ -32,6 +36,9 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     MatInputModule,
     MatButtonModule,
     MatProgressBarModule,
+    NgxsModule.forRoot([RecipesState, IngredientsState], {
+      developmentMode: !environment.production,
+    })
   ],
   providers: [
     {provide: MOCK_INJECT_TOKEN, useValue: MOCKS},

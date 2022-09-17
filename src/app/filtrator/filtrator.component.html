@@ -4,9 +4,9 @@
     <input matInput placeholder="{{'filtrator.your-search' | transloco}}" [formControl]="form.controls.searchText">
   </mat-form-field>
 
-  <app-generic-select
+  <app-generic-select *ngIf="allIngredients$ | async as options"
     [modalTitle]="'filters.ingredients' | transloco"
-    [options]="ingredientOptions"
+    [options]="options"
     (newSelection)="newIngredientsSelection($event)"
   ></app-generic-select>
 

@@ -1,11 +1,10 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {SelectOption} from '../../generic-select/generic-select.component';
-import {Ingredient} from '../../models/ingredient';
-import {catchError, EMPTY, finalize, map, Observable, tap} from 'rxjs';
-import {IngredientsService} from '../../repositories/ingredients/ingredients.service';
-import {GetAllParams, GetAllParamsInvalidError, RecipesService} from '../../repositories/recipes/recipes.service';
-import {uuidv4} from '../../app.component';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {catchError, first, Observable} from 'rxjs';
+import {GetAllParams, GetAllParamsInvalidError} from '../../repositories/recipes/recipes.service';
 import {Recipe} from '../../models/recipe.model';
+import {Select, Store} from '@ngxs/store';
+import {RecipesState} from '../../state/recipes/recipes.state';
+import {RecipesAction} from '../../state/recipes/recipes.action';
 
 export class ApplySearchError extends Error {
 }
@@ -17,53 +16,28 @@ export class ApplySearchError extends Error {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomePageComponent implements OnInit {
-  public options: SelectOption<Ingredient>[] = [
-    {data: {token: uuidv4(), name: 'cucumber'}, label: 'cucumber', selected: true},
-    {data: {token: uuidv4(), name: 'Carot'}, label: 'Carot', selected: true},
-    {data: {token: uuidv4(), name: 'apple'}, label: 'apple', selected: true},
-    {data: {token: uuidv4(), name: 'salt'}, label: 'salt', selected: true},
-    {data: {token: uuidv4(), name: 'sugar'}, label: 'sugar', selected: true},
-    {data: {token: uuidv4(), name: 'meat'}, label: 'meat', selected: true},
-  ];
+  @Select(RecipesState.recipes) public recipes$: Observable<Recipe[]>;
+  @Select(RecipesState.isLoading) public isLoading$: Observable<boolean>;
 
-  public selection: Ingredient[] = [];
-  public allIngredients$: Observable<Ingredient[]> | null = null;
-  public recipes: Recipe[] = [];
-  public isLoading = false;
 
   constructor(
-    private ingredientsService: IngredientsService,
-    private recipesService: RecipesService,
-    private cdr: ChangeDetectorRef,
+    private store: Store,
   ) {
   }
 
   public ngOnInit(): void {
-    this.allIngredients$ = this.ingredientsService.getAll().pipe(
-      map(res => res.data),
-    );
-
     this.applySearch();
   }
 
   public applySearch(searchRequest: GetAllParams = null) {
-    this.isLoading = true;
-    this.cdr.detectChanges();
-    this.recipesService.getAll(searchRequest).pipe(
+    this.store.dispatch(new RecipesAction.LoadRecipes(searchRequest)).pipe(
+      first(),
       catchError(err => {
         if (err instanceof GetAllParamsInvalidError) {
-          return this.recipesService.getAll();
+          return this.store.dispatch(new RecipesAction.LoadRecipes())
         }
         throw new ApplySearchError();
       }),
-      tap(packet => {
-        this.recipes = packet.data;
-        this.cdr.detectChanges();
-      }),
-      finalize(() => {
-        this.isLoading = false;
-        this.cdr.detectChanges();
-      })
     ).subscribe();
   }
 

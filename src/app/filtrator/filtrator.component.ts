@@ -1,17 +1,12 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output
-} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {IngredientsService} from '../repositories/ingredients/ingredients.service';
 import {Ingredient} from '../models/ingredient';
 import {SelectOption} from '../generic-select/generic-select.component';
 import {GetAllParams} from '../repositories/recipes/recipes.service';
+import {Store} from '@ngxs/store';
+import {IngredientsState} from '../state/ingredients/ingredients.state';
+import {map, Observable} from 'rxjs';
 
 interface GetAllParamsForm {
   searchText: FormControl<string | null>;
@@ -24,18 +19,21 @@ interface GetAllParamsForm {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FiltratorComponent implements OnInit {
-  @Input() public allIngredients: Ingredient[] = [];
   @Output() private newFilters = new EventEmitter<GetAllParams>();
-  public ingredientOptions: SelectOption<Ingredient>[] = [];
+  public allIngredients$: Observable<SelectOption<Ingredient>[]> ;
   public form: FormGroup<GetAllParamsForm> | null = null;
   constructor(
     private ingredientsRepository: IngredientsService,
     private fb: FormBuilder,
     private cdr: ChangeDetectorRef,
+    private store: Store,
   ) { }
 
   public ngOnInit(): void {
-    this.ingredientOptions = this.generateSelectOptions();
+    this.allIngredients$ = this.store.select(IngredientsState.ingredients).pipe(
+      map(ingredients => FiltratorComponent.generateSelectOptions(ingredients)),
+    );
+
 
     this.form = this.fb.group({
       ingredients: this.fb.control<string[]>([]),
@@ -43,8 +41,8 @@ export class FiltratorComponent implements OnInit {
     });
   }
 
-  private generateSelectOptions(): SelectOption<Ingredient>[] {
-    return this.allIngredients.map(res => {
+  private static generateSelectOptions(ingredients: Ingredient[]): SelectOption<Ingredient>[] {
+    return ingredients.map(res => {
       return {
         data: res,
         label: res.name,
