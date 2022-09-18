@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, Inject, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Recipe} from '../models/recipe.model';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
@@ -6,9 +6,10 @@ import {Ingredient} from '../models/ingredient';
 import {Select, Store} from '@ngxs/store';
 import {IngredientsState} from '../state/ingredients/ingredients.state';
 import {SelectOption} from '../generic-select/generic-select.component';
-import {Observable, tap} from 'rxjs';
+import {Observable, takeUntil, tap} from 'rxjs';
 import {RecipesState} from '../state/recipes/recipes.state';
 import {RecipesAction} from '../state/recipes/recipes.action';
+import {AbstractComponent} from '../models/abstract-component';
 
 export interface RecipeFormData {
   recipe: Recipe;
@@ -25,7 +26,7 @@ export interface RecipeForm {
   templateUrl: './recipe-form.component.html',
   styleUrls: ['./recipe-form.component.css']
 })
-export class RecipeFormComponent implements OnInit {
+export class RecipeFormComponent extends AbstractComponent implements OnInit, OnDestroy {
   public form: FormGroup<RecipeForm>;
   public ingredients: SelectOption<Ingredient>[] = [];
   @Select(RecipesState.isAdding) public adding$: Observable<boolean>;
@@ -39,6 +40,7 @@ export class RecipeFormComponent implements OnInit {
     private store: Store,
     private cdr: ChangeDetectorRef,
   ) {
+    super();
   }
 
   public ngOnInit(): void {
@@ -54,6 +56,7 @@ export class RecipeFormComponent implements OnInit {
     }));
 
     this.adding$.pipe(
+      takeUntil(this.destroy$),
       tap(res => {
         this.adding = res;
         this.cdr.detectChanges();
@@ -92,5 +95,9 @@ export class RecipeFormComponent implements OnInit {
     }
 
     action.pipe(tap(() => this.dialogRef.close())).subscribe()
+  }
+
+  public ngOnDestroy(): void {
+    this.triggerDestroy$();
   }
 }
