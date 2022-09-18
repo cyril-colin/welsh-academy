@@ -1,0 +1,14 @@
+<mat-card>
+  <mat-card-title>{{recipe.name}}</mat-card-title>
+  <mat-card-subtitle>{{ingredientsName | join }}</mat-card-subtitle>
+  <mat-card-actions>
+    <button mat-icon-button (click)="openEditDialog()">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-icon-button (click)="deleteRecipe()">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-card-actions>
+  <mat-progress-bar *ngIf="deleting" mode="indeterminate"></mat-progress-bar>
+</mat-card>
+

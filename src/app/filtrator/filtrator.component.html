@@ -1,11 +1,13 @@
 <form [formGroup]="form">
   <mat-form-field appearance="fill">
     <mat-label>{{'filtrator.by-name' | transloco}}</mat-label>
-    <input matInput placeholder="{{'filtrator.your-search' | transloco}}" [formControl]="form.controls.searchText">
+    <input matInput placeholder="{{'filtrator.your-search' | transloco}}" [formControl]="form.controls.searchText" (keydown.enter)="$event.preventDefault()">
   </mat-form-field>
 
   <app-generic-select *ngIf="allIngredients$ | async as options"
     [modalTitle]="'filters.ingredients' | transloco"
+                      [inputTitle]="'filtrator.ingredient.name' | transloco"
+                      [placeholder]="'filtrator.ingredient.placeholder' | transloco"
     [options]="options"
     (newSelection)="newIngredientsSelection($event)"
   ></app-generic-select>

@@ -10,21 +10,29 @@ import {FiltratorComponent} from './filtrator/filtrator.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
-import {MOCK_INJECT_TOKEN, RecipesService} from './repositories/recipes/recipes.service';
-import {MOCKS} from '../mocks';
-import {TranslocoModule} from '@ngneat/transloco';
+import {RecipesService} from './repositories/recipes/recipes.service';
 import {HomePageComponent} from './pages/home-page/home-page.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
-import {environment} from '../environments/environment';
 import {NgxsModule} from '@ngxs/store';
 import {RecipesState} from './state/recipes/recipes.state';
 import {IngredientsState} from './state/ingredients/ingredients.state';
+import {RecipeItemComponent} from './recipe-item/recipe-item.component';
+import {MatCardModule} from '@angular/material/card';
+import {MatListModule} from '@angular/material/list';
+import {MatIconModule} from '@angular/material/icon';
+import {JoinPipe} from './join.pipe';
+import {RecipeFormComponent} from './recipe-form/recipe-form.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
     AppComponent,
     FiltratorComponent,
     HomePageComponent,
+    RecipeItemComponent,
+    RecipeFormComponent,
+    JoinPipe,
   ],
   imports: [
     BrowserModule,
@@ -35,13 +43,17 @@ import {IngredientsState} from './state/ingredients/ingredients.state';
     ReactiveFormsModule,
     MatInputModule,
     MatButtonModule,
+    MatCardModule,
+    MatIconModule,
+    MatProgressSpinnerModule,
+    MatDialogModule,
     MatProgressBarModule,
     NgxsModule.forRoot([RecipesState, IngredientsState], {
-      developmentMode: !environment.production,
-    })
+      developmentMode: false,
+    }),
+    MatListModule
   ],
   providers: [
-    {provide: MOCK_INJECT_TOKEN, useValue: MOCKS},
     RecipesService,
   ],
   bootstrap: [AppComponent]

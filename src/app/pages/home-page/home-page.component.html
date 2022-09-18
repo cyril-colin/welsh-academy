@@ -1,9 +1,10 @@
 
 <app-filtrator (newFilters)="applySearch($event)"></app-filtrator>
 
+<mat-divider></mat-divider>
 <mat-progress-bar *ngIf="isLoading$ | async" mode="indeterminate"></mat-progress-bar>
-
-<ul *ngIf="recipes$ | async as recipes">
-  <li *ngFor="let r of recipes">{{r.name}}</li>
-</ul>
+<button mat-raised-button (click)="openNewRecipeModal()">{{'createNewRecipe' | transloco}}</button>
+<div class="recipe-list">
+  <app-recipe-item *ngFor="let r of recipes" [recipe]="r"></app-recipe-item>
+</div>
 

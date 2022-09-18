@@ -6,5 +6,15 @@
   "filtrator.by-name": "Par nom de recette",
   "filtrator.your-search": "Votre recherche ici",
   "filtrator.run": "Rechercher",
-  "generic-select.select": "Sélectionner"
+  "filtrator.ingredient.name": "Par Ingrédients",
+  "filtrator.ingredient.placeholder": "Filtrez par Ingrédients",
+  "recipe-form.title": "Nouvelle recette",
+  "recipe-form.input.name": "Nom",
+  "recipe-form.input.name-placeholder": "Nom de la recette",
+  "recipe-form.submit": "Valider",
+  "recipe-form.cancel": "Annuler",
+  "recipe-form.error.name": "Veuillez saisir un nom",
+  "recipe-form.error.ingredients": "Veuillez saisir au moins un ingredients",
+  "recipe.deletion.confirm": "Etes-vous sûr de vouloir supprimer cette recette ?",
+  "createNewRecipe": "Ajouter"
 }

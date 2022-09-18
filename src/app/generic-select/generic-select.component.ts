@@ -22,6 +22,8 @@ export interface SelectOption<T extends Model> {
 export class GenericSelectComponent<T extends Model> extends AbstractComponent implements OnInit, OnDestroy {
   @Input() public options: SelectOption<T>[] = [];
   @Input() public modalTitle: string = '';
+  @Input() public inputTitle: string = '';
+  @Input() public placeholder: string = '';
   @Output() public newSelection = new EventEmitter<T[]>();
 
   public get selection(): SelectOption<T>[] {

@@ -6,5 +6,15 @@
   "filtrator.by-name": "By recipe name",
   "filtrator.your-search": "Your research here",
   "filtrator.run": "Apply filters",
-  "generic-select.select": "Select"
+  "filtrator.ingredient.name": "By ingredients",
+  "filtrator.ingredient.placeholder": "Select your ingredients filters",
+  "recipe-form.title": "new recipe",
+  "recipe-form.input.name": "Name",
+  "recipe-form.input.name-placeholder": "Recipe name",
+  "recipe-form.submit": "Validate",
+  "recipe-form.cancel": "Cancel",
+  "recipe-form.error.name": "Please give the recipe a name",
+  "recipe-form.error.ingredients": "Please give at lease one ingredients",
+  "recipe.deletion.confirm": "Do you really want to delete this recipe ?",
+  "createNewRecipe": "New"
 }
