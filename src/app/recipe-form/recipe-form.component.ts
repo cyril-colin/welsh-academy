@@ -42,21 +42,16 @@ export class RecipeFormComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-
     this.form = this.fb.group({
       name: this.fb.control(this.data?.recipe?.name ?? null, [Validators.required]),
       ingredients: this.fb.control(this.data?.recipe?.ingredients ?? [], [Validators.required, Validators.minLength(1)]),
     });
-
-
 
     this.ingredients = this.store.selectSnapshot(IngredientsState.ingredients).map(i => ({
       data: i,
       label: i.name,
       selected: !!this.data?.recipe?.ingredients.find(selectedIngredient => i.token === selectedIngredient.token),
     }));
-    this.form.markAsUntouched();
-    this.form.reset();
 
     this.adding$.pipe(
       tap(res => {

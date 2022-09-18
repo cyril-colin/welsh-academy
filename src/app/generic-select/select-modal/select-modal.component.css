@@ -1,0 +1,5 @@
+mat-selection-list {
+  height: 400px;
+  overflow: scroll;
+  padding-right: 10px;
+}

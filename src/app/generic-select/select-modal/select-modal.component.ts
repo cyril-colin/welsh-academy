@@ -1,8 +1,16 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Inject, OnDestroy, Output } from '@angular/core';
-import { SelectOption } from '../generic-select.component';
-import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
-import { Model } from 'src/app/models/model';
-import { AbstractComponent } from 'src/app/models/abstract-component';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Inject,
+  OnDestroy,
+  Output
+} from '@angular/core';
+import {SelectOption} from '../generic-select.component';
+import {DIALOG_DATA, DialogRef} from '@angular/cdk/dialog';
+import {Model} from 'src/app/models/model';
+import {AbstractComponent} from 'src/app/models/abstract-component';
 
 export interface SelectModalOptions<T extends Model> {
   options: SelectOption<T>[];

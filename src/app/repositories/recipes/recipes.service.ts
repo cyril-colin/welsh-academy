@@ -24,7 +24,10 @@ export const MOCK_INJECT_TOKEN = new InjectionToken<string>('MOCK_INJECT_TOKEN')
 
 @Injectable()
 export class RecipesService {
-  private static isGetAllParamsValid(filters?: GetAllParams): boolean {
+  public static isGetAllParamsValid(filters?: GetAllParams): boolean {
+    if (!filters) {
+      return true;
+    }
     const textIsValid = !!filters?.searchText;
     const ingredientsValid = !!filters?.ingredients && filters.ingredients.length > 0;
     return textIsValid || ingredientsValid;
@@ -41,14 +44,14 @@ export class RecipesService {
       first(),
       map(() => {
         const packet: WAPacket<Recipe[]> = {meta: null, data: this.mocks.mocks.recipes};
-        if (filters) {
+        if (filters && (filters.searchText || filters.ingredients?.length > 0)) {
           if (!RecipesService.isGetAllParamsValid(filters)) {
             throw new GetAllParamsInvalidError();
           }
           packet.data = packet.data.filter(recipe => {
             const conditions: boolean[] = [];
             if (filters.searchText) {
-              conditions.push(recipe.name.includes(filters.searchText));
+              conditions.push(recipe.name.toLowerCase().includes(filters.searchText.toLowerCase()));
             }
             if (filters.ingredients) {
               conditions.push(!!recipe.ingredients.find(ingredient => filters.ingredients?.includes(ingredient.token)))
@@ -95,7 +98,7 @@ export class RecipesService {
       first(),
       map(() => {
         const existingIndex = this.mocks.mocks.recipes.findIndex(r => r.token === recipe.token);
-        if (!existingIndex) {
+        if (existingIndex < 0) {
           throw new RecipeNotFoundError();
         }
         const result = this.mocks.mocks.recipes[existingIndex];

@@ -1,11 +1,11 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import { SelectOption } from './generic-select/generic-select.component';
-import { Ingredient } from './models/ingredient';
-import {map, Observable, tap} from 'rxjs';
-import {IngredientsService} from './repositories/ingredients/ingredients.service';
-import {GetAllParams} from './repositories/recipes/recipes.service';
+import {tap} from 'rxjs';
 import {Store} from '@ngxs/store';
 import {IngredientsAction} from './state/ingredients/ingredients.action';
+import {RecipeFormComponent} from './recipe-form/recipe-form.component';
+import {DialogService} from './dialog.service';
+import {MatSelectChange} from '@angular/material/select';
+import {TranslocoService} from '@ngneat/transloco';
 
 
 @Component({
@@ -14,14 +14,29 @@ import {IngredientsAction} from './state/ingredients/ingredients.action';
   styleUrls: ['./app.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   constructor(
     private store: Store,
-  ) {}
+    private dialogService: DialogService,
+    private cdr: ChangeDetectorRef,
+    private transloco: TranslocoService,
+  ) {
+  }
 
   public ngOnInit(): void {
     this.store.dispatch(new IngredientsAction.LoadIngredients()).subscribe();
   }
 
+  public openNewRecipeModal(): void {
+    const dialogRef = this.dialogService.open(RecipeFormComponent);
+    dialogRef.afterClosed().pipe(
+      tap(() => this.cdr.markForCheck()),
+    ).subscribe();
+  }
 
+
+  setLanguage($event: MatSelectChange) {
+    console.log($event);
+    this.transloco.setActiveLang($event.value);
+  }
 }

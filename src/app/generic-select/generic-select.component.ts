@@ -7,6 +7,7 @@ import { AbstractComponent } from '../models/abstract-component';
 
 
 const MODAL_WIDTH = '300px';
+const MODAL_HEIGHT = '600px';
 export interface SelectOption<T extends Model> {
   data: T;
   label: string;
@@ -37,6 +38,7 @@ export class GenericSelectComponent<T extends Model> extends AbstractComponent i
   public openDialog(): void {
     const dialogRef = this.dialog.open<string>(SelectModalComponent, {
       width: MODAL_WIDTH,
+      height: MODAL_HEIGHT,
       data: {options: this.options, modalTitle: this.modalTitle} as SelectModalOptions<T>,
     });
 

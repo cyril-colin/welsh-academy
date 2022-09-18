@@ -11,6 +11,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatIconModule} from '@angular/material/icon';
 import {TranslocoModule} from '@ngneat/transloco';
+import {MatListModule} from '@angular/material/list';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import {TranslocoModule} from '@ngneat/transloco';
     MatChipsModule,
     MatIconModule,
     TranslocoModule,
+    MatListModule,
 
   ],
   exports: [

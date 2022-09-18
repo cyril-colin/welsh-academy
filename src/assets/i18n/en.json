@@ -16,5 +16,6 @@
   "recipe-form.error.name": "Please give the recipe a name",
   "recipe-form.error.ingredients": "Please give at lease one ingredients",
   "recipe.deletion.confirm": "Do you really want to delete this recipe ?",
-  "createNewRecipe": "New"
+  "createNewRecipe": "New",
+  "filtrator.clear": "Clear filters"
 }

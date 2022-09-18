@@ -26,7 +26,6 @@ export class HomePageComponent implements OnInit {
   constructor(
     private cdr: ChangeDetectorRef,
     private store: Store,
-    private dialogService: DialogService,
   ) {
   }
 
@@ -49,20 +48,6 @@ export class HomePageComponent implements OnInit {
   public applySearch(searchRequest: GetAllParams = null) {
     this.store.dispatch(new RecipesAction.LoadRecipes(searchRequest)).pipe(
       first(),
-      catchError(err => {
-        if (err instanceof GetAllParamsInvalidError) {
-          return this.store.dispatch(new RecipesAction.LoadRecipes())
-        }
-        throw new ApplySearchError();
-      }),
     ).subscribe();
-  }
-
-  public openNewRecipeModal(): void {
-    const dialogRef = this.dialogService.open(RecipeFormComponent);
-    dialogRef.afterClosed().pipe(
-      tap(() => this.cdr.markForCheck()),
-    ).subscribe();
-
   }
 }

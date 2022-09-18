@@ -60,7 +60,7 @@ export class RecipesState {
     return this.recipeService.newRecipe(action.newRecipe).pipe(
       tap(packet => {
         const recipes = ctx.getState().recipes;
-        recipes.push(packet.data);
+        recipes.unshift(packet.data);
         ctx.patchState({recipes});
       }),
       finalize(() => ctx.patchState({adding: false})),
@@ -90,7 +90,7 @@ export class RecipesState {
     return this.recipeService.delete(action.recipe).pipe(
       tap(packet => {
         const existing = ctx.getState().recipes.findIndex(r => r.token === packet.data.token);
-        if (!existing) {
+        if (existing < 0) {
           throw new NoRecipeFoundInState()
         }
 

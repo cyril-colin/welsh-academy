@@ -22,6 +22,17 @@ export class FiltratorComponent implements OnInit {
   @Output() private newFilters = new EventEmitter<GetAllParams>();
   public allIngredients$: Observable<SelectOption<Ingredient>[]> ;
   public form: FormGroup<GetAllParamsForm> | null = null;
+
+  private static generateSelectOptions(ingredients: Ingredient[]): SelectOption<Ingredient>[] {
+    return ingredients.map(res => {
+      return {
+        data: res,
+        label: res.name,
+        selected: false,
+      }
+    });
+  }
+
   constructor(
     private ingredientsRepository: IngredientsService,
     private fb: FormBuilder,
@@ -37,17 +48,7 @@ export class FiltratorComponent implements OnInit {
 
     this.form = this.fb.group({
       ingredients: this.fb.control<string[]>([]),
-      searchText: this.fb.control<string>(''),
-    });
-  }
-
-  private static generateSelectOptions(ingredients: Ingredient[]): SelectOption<Ingredient>[] {
-    return ingredients.map(res => {
-      return {
-        data: res,
-        label: res.name,
-        selected: false,
-      }
+      searchText: this.fb.control<string>(null),
     });
   }
 
@@ -62,5 +63,10 @@ export class FiltratorComponent implements OnInit {
       searchText: form?.searchText ?? '',
       ingredients: form?.ingredients ?? [],
     });
+  }
+
+  public clearFilters(): void {
+    this.ngOnInit();
+    this.cdr.detectChanges();
   }
 }

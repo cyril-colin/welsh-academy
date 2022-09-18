@@ -1,11 +1,11 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
-import { TranslocoRootModule } from './transloco-root.module';
-import { GenericSelectModule } from './generic-select/generic-select.module';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {HttpClientModule} from '@angular/common/http';
+import {TranslocoRootModule} from './transloco-root.module';
+import {GenericSelectModule} from './generic-select/generic-select.module';
 import {FiltratorComponent} from './filtrator/filtrator.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
@@ -24,6 +24,8 @@ import {JoinPipe} from './join.pipe';
 import {RecipeFormComponent} from './recipe-form/recipe-form.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatCardModule,
     MatIconModule,
     MatProgressSpinnerModule,
+    MatToolbarModule,
     MatDialogModule,
+    MatSelectModule,
     MatProgressBarModule,
     NgxsModule.forRoot([RecipesState, IngredientsState], {
       developmentMode: false,

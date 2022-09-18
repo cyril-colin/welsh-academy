@@ -1,2 +1,15 @@
-<h1>{{'appname' | transloco}}</h1>
+<mat-toolbar color="primary">
+  <span>{{'appname' | transloco}}</span>
+  <span class="spacer"></span>
+  <button mat-raised-button color="accent" (click)="openNewRecipeModal()">
+    <mat-icon>add_circle</mat-icon> {{'createNewRecipe' | transloco}}
+  </button>
+  <mat-form-field appearance="standard">
+    <mat-select [value]="'en'" (selectionChange)="setLanguage($event)">
+      <mat-option [value]="'fr'">FR</mat-option>
+      <mat-option [value]="'en'">EN</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+</mat-toolbar>
 <router-outlet></router-outlet>
