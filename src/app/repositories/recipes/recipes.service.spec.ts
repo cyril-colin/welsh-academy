@@ -1,14 +1,14 @@
 import {fakeAsync, TestBed, tick} from '@angular/core/testing';
 
-import {FAKE_TIMER, GetAllParamsInvalidError, MOCK_INJECT_TOKEN, RecipesService} from './recipes.service';
-import {Mocks} from '../../../mocks';
+import {FAKE_TIMER, GetAllParamsInvalidError, RecipesService} from './recipes.service';
 import {Ingredient} from '../../models/ingredient';
 import {Recipe} from '../../models/recipe.model';
 import {catchError, of, tap} from 'rxjs';
+import {MockService} from '../mock.service';
 
 describe('RecipesService', () => {
   let service: RecipesService;
-  let MOCKS: Mocks;
+  let MOCKS: any;
   beforeEach(() => {
     const i: Ingredient[] = [
       {token: 'cucumberToken', name: 'cucumber'},
@@ -33,7 +33,7 @@ describe('RecipesService', () => {
     TestBed.configureTestingModule({
       providers: [
         RecipesService,
-        {provide: MOCK_INJECT_TOKEN, useValue: MOCKS},
+        {provide: MockService, useValue: {mocks: MOCKS}},
       ]
     });
     service = TestBed.inject(RecipesService);

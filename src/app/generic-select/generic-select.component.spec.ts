@@ -11,6 +11,7 @@ import {MatChip, MatChipsModule} from '@angular/material/chips';
 import {MatIconModule} from '@angular/material/icon';
 import {By} from '@angular/platform-browser';
 import {of, tap} from 'rxjs';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 
 describe('GenericSelectComponent', () => {
@@ -36,6 +37,7 @@ describe('GenericSelectComponent', () => {
         MatChipsModule,
         MatIconModule,
         MatDialogModule,
+        MatFormFieldModule,
       ],
       providers: [
         MockProvider(DialogRef),
@@ -90,7 +92,7 @@ describe('GenericSelectComponent', () => {
         ]),
       }
     } as any)
-    const button = fixture.debugElement.query(By.css('button'));
+    const button = fixture.debugElement.query(By.css('mat-form-field'));
     button.triggerEventHandler('click');
   });
 });

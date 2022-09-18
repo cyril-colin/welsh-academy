@@ -1,4 +1,4 @@
-import {async, ComponentFixture, fakeAsync, TestBed, tick, waitForAsync} from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {SelectModalComponent, SelectModalOptions} from './select-modal.component';
 import {Ingredient} from '../../models/ingredient';
@@ -7,10 +7,10 @@ import {DIALOG_DATA, DialogRef} from '@angular/cdk/dialog';
 import {MockProvider} from 'ng-mocks';
 import {MatCardModule} from '@angular/material/card';
 import {TranslocoTestingModule} from '@ngneat/transloco';
-import {MatCheckbox, MatCheckboxModule} from '@angular/material/checkbox';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 import {By} from '@angular/platform-browser';
-import {DebugElement} from '@angular/core';
 import {tap} from 'rxjs';
+import {MatListModule, MatListOption} from '@angular/material/list';
 
 
 describe('SelectModalComponent', () => {
@@ -38,6 +38,7 @@ describe('SelectModalComponent', () => {
         MatCardModule,
         MatCheckboxModule,
         TranslocoTestingModule,
+        MatListModule,
       ],
       providers: [
         MockProvider(DialogRef),
@@ -52,20 +53,20 @@ describe('SelectModalComponent', () => {
   it('should create and have 6 checkboxes, 3 checked', (() => {
     expect(component).toBeTruthy();
 
-    const checkboxes = fixture.debugElement.queryAll(By.directive(MatCheckbox));
+    const checkboxes = fixture.debugElement.queryAll(By.directive(MatListOption));
     expect(checkboxes.length).toBe(6);
-    expect(checkboxes.filter(c => (c.componentInstance as MatCheckbox).checked).length).toBe(3);
-    expect(checkboxes.filter(c => !(c.componentInstance as MatCheckbox).checked).length).toBe(3);
+    expect(checkboxes.filter(c => (c.componentInstance as MatListOption).selected).length).toBe(3);
+    expect(checkboxes.filter(c => !(c.componentInstance as MatListOption).selected).length).toBe(3);
 
 
   }));
 
   it('click on check box flip the box', (() => {
-    const checkboxes = fixture.debugElement.queryAll(By.directive(MatCheckbox));
-    checkboxes[0].triggerEventHandler('change', mockedOptions.options[0]);
+    const checkboxes = fixture.debugElement.queryAll(By.directive(MatListOption));
+    checkboxes[0].triggerEventHandler('click', mockedOptions.options[0]);
 
-    expect(checkboxes.filter(c => (c.componentInstance as MatCheckbox).checked).length).toBe(2);
-    expect(checkboxes.filter(c => !(c.componentInstance as MatCheckbox).checked).length).toBe(4);
+    expect(checkboxes.filter(c => (c.componentInstance as MatListOption).selected).length).toBe(2);
+    expect(checkboxes.filter(c => !(c.componentInstance as MatListOption).selected).length).toBe(4);
   }));
 
   it('click on validate should return the new selection', (() => {
@@ -76,9 +77,9 @@ describe('SelectModalComponent', () => {
       })
     ).subscribe();
 
-    const checkboxes = fixture.debugElement.queryAll(By.directive(MatCheckbox));
-    checkboxes[0].triggerEventHandler('change', mockedOptions.options[0]);
-    checkboxes[1].triggerEventHandler('change', mockedOptions.options[1]);
+    const checkboxes = fixture.debugElement.queryAll(By.directive(MatListOption));
+    checkboxes[0].triggerEventHandler('click', mockedOptions.options[0]);
+    checkboxes[1].triggerEventHandler('click', mockedOptions.options[1]);
     buttons[0].triggerEventHandler('click');
 
   }));

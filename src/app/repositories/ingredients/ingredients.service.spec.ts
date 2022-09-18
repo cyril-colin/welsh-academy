@@ -3,13 +3,11 @@ import { TestBed } from '@angular/core/testing';
 import { IngredientsService } from './ingredients.service';
 import {Ingredient} from '../../models/ingredient';
 import {Recipe} from '../../models/recipe.model';
-import {Mock} from 'ng-mocks';
-import {MOCK_INJECT_TOKEN, RecipesService} from '../recipes/recipes.service';
-import {Mocks} from '../../../mocks';
+import {MockService} from '../mock.service';
 
 describe('IngredientsService', () => {
   let service: IngredientsService;
-  let MOCKS: Mocks;
+  let MOCKS: any;
 
   beforeEach(() => {
     const i: Ingredient[] = [
@@ -34,13 +32,13 @@ describe('IngredientsService', () => {
     TestBed.configureTestingModule({
       providers: [
         IngredientsService,
-        {provide: MOCK_INJECT_TOKEN, useValue: MOCKS},
+        {provide: MockService, useValue: {mocks: MOCKS}},
       ]
     });
     service = TestBed.inject(IngredientsService);
   });
 
-  fit('should be created', () => {
+  it('should be created', () => {
     expect(service).toBeTruthy();
   });
 });
