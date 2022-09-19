@@ -2,15 +2,15 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {HomePageComponent} from './home-page.component';
 import {MockComponent, MockProvider} from 'ng-mocks';
-import {FiltratorComponent} from '../../filtrator/filtrator.component';
+import {FiltratorComponent} from '../../modules/filtrator/filtrator.component';
 import {MatDividerModule} from '@angular/material/divider';
-import {RecipeItemComponent} from '../../recipe-item/recipe-item.component';
+import {RecipeItemComponent} from '../../modules/recipe/recipe-item/recipe-item.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {NgxsModule, Store} from '@ngxs/store';
-import {RecipesState} from '../../state/recipes/recipes.state';
-import {IngredientsState} from '../../state/ingredients/ingredients.state';
-import {RecipesService} from '../../repositories/recipes/recipes.service';
-import {IngredientsService} from '../../repositories/ingredients/ingredients.service';
+import {RecipesState} from '../../data/state/recipes/recipes.state';
+import {IngredientsState} from '../../data/state/ingredients/ingredients.state';
+import {RecipesService} from '../../data/repositories/recipes/recipes.service';
+import {IngredientsService} from '../../data/repositories/ingredients/ingredients.service';
 import {of} from 'rxjs';
 
 describe('HomePageComponent', () => {

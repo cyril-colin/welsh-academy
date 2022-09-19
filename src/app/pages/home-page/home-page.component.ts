@@ -1,12 +1,12 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {catchError, first, Observable, takeUntil, tap} from 'rxjs';
-import {GetAllParams, GetAllParamsInvalidError} from '../../repositories/recipes/recipes.service';
+import {GetAllParams, GetAllParamsInvalidError} from '../../data/repositories/recipes/recipes.service';
 import {Recipe} from '../../models/recipe.model';
 import {Select, Store} from '@ngxs/store';
-import {RecipesState} from '../../state/recipes/recipes.state';
-import {RecipesAction} from '../../state/recipes/recipes.action';
-import {RecipeFormComponent, RecipeFormData} from '../../recipe-form/recipe-form.component';
-import {DialogService} from '../../dialog.service';
+import {RecipesState} from '../../data/state/recipes/recipes.state';
+import {RecipesAction} from '../../data/state/recipes/recipes.action';
+import {RecipeFormComponent, RecipeFormData} from '../../modules/recipe/recipe-form/recipe-form.component';
+import {DialogService} from '../../modules/common/dialog.service/dialog.service';
 import {AbstractComponent} from '../../models/abstract-component';
 
 export class ApplySearchError extends Error {

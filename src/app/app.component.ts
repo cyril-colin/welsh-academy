@@ -1,9 +1,9 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {tap} from 'rxjs';
 import {Store} from '@ngxs/store';
-import {IngredientsAction} from './state/ingredients/ingredients.action';
-import {RecipeFormComponent} from './recipe-form/recipe-form.component';
-import {DialogService} from './dialog.service';
+import {IngredientsAction} from './data/state/ingredients/ingredients.action';
+import {RecipeFormComponent} from './modules/recipe/recipe-form/recipe-form.component';
+import {DialogService} from './modules/common/dialog.service/dialog.service';
 import {MatSelectChange} from '@angular/material/select';
 import {TranslocoService} from '@ngneat/transloco';
 
