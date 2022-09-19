@@ -84,7 +84,7 @@ export class RecipesService {
       first(),
       map(() => {
         const existingIndex = this.mocks.mocks.recipes.findIndex(r => r.token === recipe.token);
-        if (!existingIndex) {
+        if (existingIndex < 0) {
           throw new RecipeNotFoundError();
         }
         const result = this.mocks.mocks.recipes[existingIndex] = recipe;

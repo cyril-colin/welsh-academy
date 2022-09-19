@@ -74,7 +74,7 @@ export class RecipesState {
       tap(packet => {
         const recipes = ctx.getState().recipes;
         const existing = recipes.findIndex(r => r.token === packet.data.token);
-        if (!existing) {
+        if (existing < 0) {
           throw new NoRecipeFoundInState()
         }
         recipes[existing] = packet.data;
