@@ -30,7 +30,7 @@ describe('FiltratorComponent', () => {
         MatInputModule,
       ],
       providers: [
-        MockProvider(Store, {select: (arg: any) => of([])}),
+        MockProvider(Store, {select: (_arg: any) => of([])}),
       ]
     }).compileComponents();
 

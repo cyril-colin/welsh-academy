@@ -17,5 +17,8 @@
   "recipe-form.error.ingredients": "Veuillez saisir au moins un ingredients",
   "recipe.deletion.confirm": "Etes-vous sûr de vouloir supprimer cette recette ?",
   "createNewRecipe": "Ajouter",
-  "filtrator.clear": "Vider les filtres"
+  "filtrator.clear": "Vider les filtres",
+  "recipe-form.input.description-label": "Description",
+  "recipe-form.input.description-placeholder": "Description de la recette",
+  "recipe-form.error.description": "Veuillez saisir une description"
 }

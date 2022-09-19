@@ -17,6 +17,7 @@ export interface RecipeFormData {
 
 export interface RecipeForm {
   name: FormControl<string>;
+  description: FormControl<string>;
   ingredients: FormControl<Ingredient[]>;
 }
 
@@ -44,8 +45,10 @@ export class RecipeFormComponent extends AbstractComponent implements OnInit, On
   }
 
   public ngOnInit(): void {
+    console.log(this.data?.recipe);
     this.form = this.fb.group({
       name: this.fb.control(this.data?.recipe?.name ?? null, [Validators.required]),
+      description: this.fb.control(this.data?.recipe?.description ?? null, [Validators.required]),
       ingredients: this.fb.control(this.data?.recipe?.ingredients ?? [], [Validators.required, Validators.minLength(1)]),
     });
 
@@ -80,18 +83,17 @@ export class RecipeFormComponent extends AbstractComponent implements OnInit, On
     const formResult = this.form.getRawValue();
 
     let action;
+    const newData: Recipe = {
+      name: formResult.name,
+      ingredients: formResult.ingredients,
+      description: formResult.description,
+      token: null,
+    }
     if (this.data) {
-      action = this.store.dispatch(new RecipesAction.EditRecipe({
-        name: formResult.name,
-        ingredients: formResult.ingredients,
-        token: this.data?.recipe.token,
-      }));
+      newData.token = this.data?.recipe.token;
+      action = this.store.dispatch(new RecipesAction.EditRecipe(newData));
     } else {
-      action = this.store.dispatch(new RecipesAction.NewRecipe({
-        name: formResult.name,
-        ingredients: formResult.ingredients,
-        token: null,
-      }));
+      action = this.store.dispatch(new RecipesAction.NewRecipe(newData));
     }
 
     action.pipe(tap(() => this.dialogRef.close())).subscribe()

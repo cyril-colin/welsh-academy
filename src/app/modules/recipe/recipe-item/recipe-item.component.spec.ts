@@ -36,7 +36,7 @@ describe('RecipeItemComponent', () => {
 
     fixture = TestBed.createComponent(RecipeItemComponent);
     component = fixture.componentInstance;
-    component.recipe = {token: 'rToken', name: 'recipeTest', ingredients: []};
+    component.recipe = {token: 'rToken', name: 'recipeTest', ingredients: [], description: 'description'};
     fixture.detectChanges();
   });
 

@@ -17,5 +17,8 @@
   "recipe-form.error.ingredients": "Please give at lease one ingredients",
   "recipe.deletion.confirm": "Do you really want to delete this recipe ?",
   "createNewRecipe": "New",
-  "filtrator.clear": "Clear filters"
+  "filtrator.clear": "Clear filters",
+  "recipe-form.input.description-label": "Description",
+  "recipe-form.input.description-placeholder": "Recipe's description",
+  "recipe-form.error.description": "Please give the recipe a description"
 }

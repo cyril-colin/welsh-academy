@@ -47,7 +47,7 @@ describe('RecipeFormComponent', () => {
         {provide: MAT_DIALOG_DATA, useValue: null},
         MockProvider(RecipesService),
         MockProvider(IngredientsService),
-        MockProvider(Store, {dispatch: (arg: any) => of(null), selectSnapshot: (arg: any) => []}),
+        MockProvider(Store, {dispatch: (arg: any) => of(null), selectSnapshot: (_arg: any) => []}),
       ]
     })
     .compileComponents();

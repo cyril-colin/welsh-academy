@@ -7,7 +7,11 @@
         <input matInput placeholder="{{'recipe-form.input.name-placeholder' | transloco}}" [formControl]="form.controls.name">
       </mat-form-field>
       <mat-error *ngIf="form.controls.name.hasError('required')">{{ 'recipe-form.error.name' | transloco }}</mat-error>
-
+      <mat-form-field appearance="fill">
+        <mat-label>{{'recipe-form.input.description-label' | transloco}}</mat-label>
+        <textarea matInput [formControl]="form.controls.description" placeholder="{{'recipe-form.input.description-placeholder' | transloco}}"></textarea>
+      </mat-form-field>
+      <mat-error *ngIf="form.controls.description.hasError('required')">{{ 'recipe-form.error.description' | transloco }}</mat-error>
       <app-generic-select [options]="ingredients" (newSelection)="setIngredients($event)"></app-generic-select>
       <mat-error *ngIf="form.controls.ingredients.hasError('minLength')">{{ 'recipe-form.error.ingredients' | transloco }}</mat-error>
       <mat-error *ngIf="form.controls.ingredients.hasError('required')">{{ 'recipe-form.error.ingredients' | transloco }}</mat-error>
